@@ -31,26 +31,13 @@ public class TokenGenerator extends AppCompatActivity {
 
         tokenPreview = findViewById(R.id.tokenView);
 
-        String text = getToken();
-        System.out.println(getToken() + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        if (text == ""){
-            text = "got nothing";
-        }
-        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-        try {
-            System.out.println("on  gene ++++++++++++++++++++++++++++");
-            BitMatrix bitMatrix = multiFormatWriter.encode(text, BarcodeFormat.QR_CODE,400,400);
-            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-            tokenPreview.setImageBitmap(bitmap);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
+        getToken();
+
     }
 
-    private String getToken (){
+    private void getToken (){
+        String text = "";
 
-        final String[] retSt = {""};
         String json_url = "https://powerful-plateau-81192.herokuapp.com/api/vehicles";
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, json_url, null, new Response.Listener<JSONArray>() {
@@ -72,8 +59,8 @@ public class TokenGenerator extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                retSt[0] = number[0];
-                System.out.println(retSt[0] + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                    generateQr(number[0]);
+
             }
 
         }, new Response.ErrorListener() {
@@ -83,8 +70,6 @@ public class TokenGenerator extends AppCompatActivity {
             }
         });
         Volley.newRequestQueue(TokenGenerator.this).add(jsonObjectRequest);
-
-        return retSt[0];
 
 /*      ret
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -108,5 +93,18 @@ public class TokenGenerator extends AppCompatActivity {
 // Add the request to the RequestQueue.
         queue.add(stringRequest);*/
 
+    }
+
+    private void generateQr(String text){
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try {
+            System.out.println("on  gene ++++++++++++++++++++++++++++");
+            BitMatrix bitMatrix = multiFormatWriter.encode(text, BarcodeFormat.QR_CODE,400,400);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            tokenPreview.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
     }
 }
