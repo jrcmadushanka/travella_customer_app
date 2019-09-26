@@ -6,20 +6,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class Splash extends AppCompatActivity {
+    Button loginBtn;
 
-    Button ticketsBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash);
 
-        ticketsBtn = findViewById(R.id.ticketBtn);
+        loginBtn = findViewById(R.id.login_btn);
 
-        ticketsBtn.setOnClickListener(new View.OnClickListener() {
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent  intent = new Intent(MainActivity.this, Route.class);
+                Intent intent = new Intent(Splash.this,MainActivity.class);
+                intent.putExtra("user", "LoggedIn");
                 startActivity(intent);
                 finish();
             }

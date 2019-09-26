@@ -6,23 +6,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class Route extends AppCompatActivity {
 
-    Button ticketsBtn;
+    Button getTicketBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_route);
 
-        ticketsBtn = findViewById(R.id.ticketBtn);
+        getTicketBtn = findViewById(R.id.getTicketBtn);
 
-        ticketsBtn.setOnClickListener(new View.OnClickListener() {
+        getTicketBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent  intent = new Intent(MainActivity.this, Route.class);
+                Intent intent = new Intent( Route.this, TokenGenerator.class);
                 startActivity(intent);
                 finish();
             }
         });
+
     }
 }
