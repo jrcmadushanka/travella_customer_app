@@ -22,7 +22,6 @@ public class Route extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent( Route.this, TokenGenerator.class);
                 startActivity(intent);
-                finish();
             }
         });
 

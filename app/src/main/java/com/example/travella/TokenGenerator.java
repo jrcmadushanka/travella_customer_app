@@ -29,11 +29,14 @@ import java.util.Map;
 public class TokenGenerator extends AppCompatActivity {
 
     ImageView tokenPreview;
+    DatabaseOperations DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_token_generator);
+
+        DB = new DatabaseOperations(TokenGenerator.this);
 
         tokenPreview = findViewById(R.id.tokenView);
 
@@ -57,15 +60,25 @@ public class TokenGenerator extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject array) {
 
-                String[] url = new String[array.length()];
+                String[] id = new String[array.length()];
+                String[] token = new String[array.length()];
+                String[] journey = new String[array.length()];
+                String[] vehicle = new String[array.length()];
+                String[] status = new String[array.length()];
 
                 try {
-                    url[0] = (array.get("token")).toString();
+                    id[0] = (array.get("id")).toString();
+                    token[0] = (array.get("token")).toString();
+                    journey[0] = (array.get("journey_id")).toString();
+                    vehicle[0] = (array.get("vehicle_id")).toString();
+                    status[0] = (array.get("status")).toString();
+
+                    DB.putTokens(DB, id[0], token[0], journey[0], vehicle[0], status[0]);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                generateQr(url[0]);
+                generateQr(token[0]);
 
             }
 
