@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TokenGenerator"></activity>
+        <activity android:name=".activity_add_reservation"></activity>
+        <activity android:name=".reservation" />
+        <activity android:name=".activity_sign_up" />
+        <activity android:name=".activity_home" />
+        <activity android:name=".TokenGenerator" />
         <activity android:name=".Route" />
         <activity android:name=".Splash">
             <intent-filter>

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Travella</string>
+
+    <string name="addplan">Make a Reservation</string>
+    <string name="viewplan">View Reservations</string>
+    <string name="plandone">Donned Reservations</string>
+    <string name="addplandes">Add a Reservation planning..!</string>
+    <string name="viewplandes">View the previously added Reservations..!</string>
+    <string name="runworkoutdes">Enjoy the best of the Transportation.</string>
 </resources>

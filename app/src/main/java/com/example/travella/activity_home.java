@@ -4,34 +4,35 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 
-public class Splash extends AppCompatActivity {
-    Button loginBtn, signup;
+public class activity_home extends AppCompatActivity {
+
+    ImageButton img, res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.activity_home);
 
-        loginBtn = findViewById(R.id.button9);
+        img = findViewById(R.id.ticket);
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
+        img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Splash.this,activity_home.class);
+                Intent intent = new Intent(activity_home.this,MainActivity.class);
                 intent.putExtra("user", "LoggedIn");
                 startActivity(intent);
                 finish();
             }
         });
 
-        signup = findViewById(R.id.button17);
+        res = findViewById(R.id.reserve);
 
-        signup.setOnClickListener(new View.OnClickListener() {
+        res.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Splash.this,activity_sign_up.class);
+                Intent intent = new Intent(activity_home.this,reservation.class);
                 intent.putExtra("user", "LoggedIn");
                 startActivity(intent);
                 finish();
