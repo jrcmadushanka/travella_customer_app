@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -20,7 +19,6 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,6 +31,8 @@ public class TokenGenerator extends AppCompatActivity {
     ImageView tokenPreview;
     DatabaseOperations DB;
     Button myTokens, home;
+    String oldToken = "";
+    boolean notI = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,15 @@ public class TokenGenerator extends AppCompatActivity {
         setContentView(R.layout.activity_token_generator);
 
         DB = new DatabaseOperations(TokenGenerator.this);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("token")) {
+            oldToken = intent.getStringExtra("token");
+
+        } else {
+            boolean notI = false;
+        }
+        oldToken = intent.getStringExtra("token");
 
         tokenPreview = findViewById(R.id.tokenView);
         myTokens = findViewById(R.id.my_token_btn);
@@ -49,7 +58,12 @@ public class TokenGenerator extends AppCompatActivity {
         //this must be the journey value;
         int journeyID = new Random().nextInt(100000 - 100) - 50;
 
-        generateToken(id, Integer.toString(journeyID));
+        if (notI){
+            generateQr(oldToken);
+        }
+        else {
+            generateToken(id, Integer.toString(journeyID));
+        }
 
         myTokens.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +80,6 @@ public class TokenGenerator extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
     }
 
@@ -99,8 +112,8 @@ public class TokenGenerator extends AppCompatActivity {
                     vehicle[0] = (array.get("vehicle_id")).toString();
                     status[0] = (array.get("status")).toString();
 
-                    DB.putTokens(DB, id[0], token[0], journey[0], vehicle[0], status[0]);
-
+                    DB.putTokens(DB, id[0], token[0], vehicle[0] , journey[0], status[0]);
+                    System.out.println(journey[0]);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

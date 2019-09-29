@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         mytokens.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent  intent = new Intent(MainActivity.this, Route.class);
+                Intent  intent = new Intent(MainActivity.this, MyTokens.class);
                 startActivity(intent);
             }
         });

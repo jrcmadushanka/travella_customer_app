@@ -47,6 +47,7 @@ public class DatabaseOperations extends SQLiteOpenHelper {
         cv.put("journey", journey);
         cv.put("status", status);
         long k = SQ.insert("tokens", null, cv);
+        System.out.println(journey);
     }
 
     public Cursor getTokens(DatabaseOperations dop) {
